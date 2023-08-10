@@ -5,7 +5,9 @@ import com.backend.integrador.entity.Odontologo;
 import com.backend.integrador.service.OdontologoService;
 import org.junit.Test;
 
-import static org.junit.Assert.assertNotNull;
+import java.util.List;
+
+import static org.junit.Assert.*;
 
 
 public class OdontologoServiceTest {
@@ -17,8 +19,18 @@ public class OdontologoServiceTest {
     @Test
     public void deberiaAgregarUnOdontologo(){
         Odontologo odonto1 = new Odontologo(35465, "Pepito", "Perez");
+        Odontologo odonto2 = new Odontologo(35466, "Matias", "Ardusso");
         Odontologo odontologoInsertado = odontologoService.registrarOdontologo(odonto1);
-
+        Odontologo odontologoInsertado2 = odontologoService.registrarOdontologo(odonto2);
         assertNotNull(odontologoInsertado.getId());
+    }
+
+
+    @Test
+    public void deberiaHaberUnaListaNoVacia(){
+        List<Odontologo> odontologosTest = odontologoService.listarTodosLosOdontologos();
+
+        assertFalse(odontologosTest.isEmpty());
+        assertTrue(odontologosTest.size() >= 1);
     }
 }
